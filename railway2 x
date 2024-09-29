@@ -1,0 +1,82 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+// Train class to store train information
+class Train {
+public:
+    int trainID;
+    string trainName;
+    string source;
+    string destination;
+
+    Train(int id, string name, string src, string dest) {
+        trainID = id;
+        trainName = name;
+        source = src;
+        destination = dest;
+    }
+};
+
+// Simple system for railway management
+vector<Train> trains;
+int trainIDCounter = 1;
+
+// Function to add a train
+void addTrain() {
+    string name, source, destination;
+    cout << "Enter train name: ";
+    cin >> name;
+    cout << "Enter source: ";
+    cin >> source;
+    cout << "Enter destination: ";
+    cin >> destination;
+
+    trains.push_back(Train(trainIDCounter++, name, source, destination));
+    cout << "Train added successfully!\n";
+}
+
+// Function to view all trains
+void viewTrains() {
+    if (trains.empty()) {
+        cout << "No trains available.\n";
+        return;
+    }
+
+    cout << "Available trains:\n";
+    for (const auto& train : trains) {
+        cout << "Train ID: " << train.trainID 
+             << ", Name: " << train.trainName 
+             << ", From: " << train.source 
+             << " To: " << train.destination << "\n";
+    }
+}
+
+// Main function
+int main() {
+    int choice;
+
+    while (true) {
+        cout << "\n--- Simple Railway Management System ---\n";
+        cout << "1. Add Train\n";
+        cout << "2. View Trains\n";
+        cout << "3. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addTrain();
+                break;
+            case 2:
+                viewTrains();
+                break;
+            case 3:
+                cout << "Exiting the system.\n";
+                return 0;
+            default:
+                cout << "Invalid choice. Try again.\n";
+        }
+    }
+}
